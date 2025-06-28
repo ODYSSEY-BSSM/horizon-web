@@ -12,34 +12,35 @@
   - [ ] 테마 설정
 - [ ] 상태 관리 설정
   - [ ] Zustand 스토어 설계
-  - [ ] React Query 설정
+  - [ ] TanStack Query 설정
 - [ ] 테스트 환경 구축
-  - [ ] Jest 설정
+  - [ ] Vitest 설정
   - [ ] 테스트 코드 작성
 - [ ] CI/CD 파이프라인 구축
   - [ ] GitHub Actions 설정
   - [ ] Vercel 배포 설정
 - [ ] 패키지 매니저 설정
   - [ ] pnpm 8.0.0+ 설치 확인
-  - [ ] Node.js 18.0.0+ 설치 확인
+  - [ ] Node.js 20.0.0+ 설치 확인
 - [ ] 프로젝트 의존성 설치
   - [ ] `pnpm install` 실행
   - [ ] @odyssey-horizon/ui@1.0.0 패키지 접근 권한 확인
 - [ ] 개발 도구 설정
   - [ ] husky 설정 (`pnpm prepare`)
-  - [ ] ESLint, Prettier 설정 확인
+  - [ ] Biome 설정 확인 (ESLint + Prettier 통합)
   - [ ] TypeScript 설정 확인
+  - [ ] knip 설정 (사용하지 않는 코드 검사)
 - [ ] 분석 도구 설정
   - [ ] Vercel Analytics 설정
   - [ ] Vercel Speed Insights 설정
 - [ ] 테스트 환경 설정
-  - [ ] Jest + React Testing Library 설정
-  - [ ] jest-environment-jsdom 설정
-  - [ ] ts-jest 설정
+  - [ ] Vitest + React Testing Library 설정
+  - [ ] jsdom 환경 설정
+  - [ ] TypeScript 네이티브 지원 확인
 - [ ] SEO 설정
   - [ ] next-seo 기본 설정
 - [ ] 상태 관리 설정
-  - [ ] React Query 설정 (캐싱, 에러 핸들링)
+  - [ ] TanStack Query v5 설정 (캐싱, 에러 핸들링)
   - [ ] Zustand 스토어 설정
   - [ ] react-hot-toast 설정
 - [ ] 스타일링 설정
@@ -93,17 +94,19 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ### 코드 품질
 
-- `pnpm lint` - ESLint로 코드 검사
-- `pnpm lint:fix` - ESLint로 코드 자동 수정
+- `pnpm lint` - Biome으로 코드 검사
+- `pnpm lint:fix` - Biome으로 코드 자동 수정
+- `pnpm format` - Biome으로 코드 포맷팅
+- `pnpm format:check` - Biome으로 포맷팅 검사
 - `pnpm type-check` - TypeScript 타입 체크
-- `pnpm format` - Prettier로 코드 포맷팅
-- `pnpm format:check` - Prettier로 포맷팅 검사
+- `pnpm check:unused` - knip으로 사용하지 않는 코드 검사
 
 ### 테스트
 
-- `pnpm test` - 테스트 실행
+- `pnpm test` - Vitest로 테스트 실행
 - `pnpm test:watch` - 테스트 감시 모드로 실행
 - `pnpm test:coverage` - 테스트 커버리지 리포트 생성
+- `pnpm test:ui` - Vitest UI로 테스트 실행
 - `pnpm test:ci` - CI 환경용 테스트 실행
 
 ### Git Hooks
@@ -127,8 +130,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ### 코드 품질 설정
 
-- `eslint.config.mjs` - ESLint 설정
+- `biome.json` - Biome 설정 (linting + formatting)
 - `.husky/` - Git hooks 설정
+- `knip.json` - 사용하지 않는 코드 검사 설정
 
 ### Next.js 설정
 
@@ -140,28 +144,29 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ### 테스트 설정
 
-- [ ] `jest.config.ts` - Jest 설정
+- [ ] `vitest.config.ts` - Vitest 설정
 
   ```ts
-  import type { Config } from 'jest';
-  import nextJest from 'next/jest.js';
+  import { defineConfig } from 'vitest/config';
+  import react from '@vitejs/plugin-react';
+  import path from 'path';
 
-  const createJestConfig = nextJest({
-    dir: './',
-  });
-
-  const config: Config = {
-    setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-    testEnvironment: 'jest-environment-jsdom',
-    moduleNameMapper: {
-      '^@/(.*)$': '<rootDir>/src/$1',
+  export default defineConfig({
+    plugins: [react()],
+    test: {
+      environment: 'jsdom',
+      setupFiles: ['./vitest.setup.ts'],
+      globals: true,
     },
-  };
-
-  export default createJestConfig(config);
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
+    },
+  });
   ```
 
-- [ ] `jest.setup.ts` - Jest 설정 초기화
+- [ ] `vitest.setup.ts` - Vitest 설정 초기화
   ```ts
   import '@testing-library/jest-dom';
   ```
@@ -173,13 +178,29 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ### 스타일 설정
 
-- [ ] `.prettierrc` - Prettier 설정
+- [ ] `biome.json` - Biome 설정 (linting + formatting 통합)
   ```json
   {
-    "semi": false,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "es5"
+    "$schema": "https://biomejs.dev/schemas/1.5.0/schema.json",
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineWidth": 100
+    },
+    "linter": {
+      "enabled": true,
+      "rules": {
+        "recommended": true
+      }
+    },
+    "javascript": {
+      "formatter": {
+        "quoteStyle": "single",
+        "trailingComma": "es5",
+        "semicolons": "asNeeded"
+      }
+    }
   }
   ```
 - [ ] `src/styles/theme.ts` - Emotion 테마 설정
@@ -188,7 +209,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ### 상태 관리
 
 - [ ] `src/store/index.ts` - Zustand 스토어 설정
-- [ ] `src/queries/index.ts` - React Query 설정
+- [ ] `src/queries/index.ts` - TanStack Query v5 설정
 
 ### API & 유효성 검사
 
@@ -217,6 +238,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
   pnpm lint
   pnpm type-check
+  pnpm check:unused
   ```
 
 - [ ] `.husky/commit-msg` - 커밋 메시지 검사
@@ -228,9 +250,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
   ```json
   {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit"
     }
   }
   ```
@@ -238,9 +261,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
   ```json
   {
     "recommendations": [
-      "dbaeumer.vscode-eslint",
-      "esbenp.prettier-vscode",
-      "bradlc.vscode-tailwindcss"
+      "biomejs.biome",
+      "vitest.explorer",
+      "ms-vscode.vscode-typescript-next"
     ]
   }
   ```
