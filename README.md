@@ -147,20 +147,20 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - [ ] `vitest.config.ts` - Vitest 설정
 
   ```ts
-  import { defineConfig } from 'vitest/config';
-  import react from '@vitejs/plugin-react';
-  import path from 'path';
+  import { defineConfig } from "vitest/config";
+  import react from "@vitejs/plugin-react";
+  import path from "path";
 
   export default defineConfig({
     plugins: [react()],
     test: {
-      environment: 'jsdom',
-      setupFiles: ['./vitest.setup.ts'],
+      environment: "jsdom",
+      setupFiles: ["./vitest.setup.ts"],
       globals: true,
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        "@": path.resolve(__dirname, "./src"),
       },
     },
   });
@@ -168,7 +168,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 - [ ] `vitest.setup.ts` - Vitest 설정 초기화
   ```ts
-  import '@testing-library/jest-dom';
+  import "@testing-library/jest-dom";
   ```
 
 ### 타입 설정
