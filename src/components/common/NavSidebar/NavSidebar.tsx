@@ -6,23 +6,22 @@ import Link from 'next/link';
 import { ETC_ITEMS, MAIN_ITEMS } from './NavSidebar.constants';
 import { SidebarItem } from './SidebarItem/SidebarItem';
 
-const NavSidebar = () => {
+type Size = 'small' | 'big';
+
+interface NavSidebarProps {
+    size?: Size;
+}
+
+const NavSidebar = ({size='big'}:NavSidebarProps) => {
   return (
-    <StyledSidebar>
-      <LogoBox>
-        <Row width='226px'>
-          <Link href='/'>
-            <HorizonLogo height='40px' />
-          </Link>
-        </Row>
-      </LogoBox>
+    <StyledSidebar size={size}>
       <Column gap='10px' padding='10px 12px'>
         <Text variant='B_M_12' color={color.grayscale['400']} style={{ marginLeft: '8px' }}>
           메인
         </Text>
         <Column gap='10px'>
           {MAIN_ITEMS.map(({ name, icon, to }) => (
-            <SidebarItem key={to} icon={icon} to={to}>
+            <SidebarItem key={to} size={size} icon={icon} to={to}>
               {name}
             </SidebarItem>
           ))}
@@ -37,7 +36,7 @@ const NavSidebar = () => {
         </Text>
         <Column gap='10px'>
           {ETC_ITEMS.map(({ name, icon, to }) => (
-            <SidebarItem key={to} icon={icon} to={to}>
+            <SidebarItem key={to} size={size} icon={icon} to={to}>
               {name}
             </SidebarItem>
           ))}
@@ -49,21 +48,15 @@ const NavSidebar = () => {
 
 export default NavSidebar;
 
+interface StyledSidebarProps {
+    size: Size;
+}
+
 const StyledSidebar = styled.div`
-  width: 266px;
-  height: 100vh;
+  width: ${({ size }: StyledSidebarProps) => (size === 'big' ? '100%' : 'auto')};
   background: ${color.white};
   border-right: 1px solid ${color.grayscale['100']};
   box-sizing: border-box;
-`;
-
-const LogoBox = styled.div`
-  width: 100%;
-  height: 64px;
-  border-bottom: 1px solid ${color.grayscale['100']};
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const Divider = styled.div`
