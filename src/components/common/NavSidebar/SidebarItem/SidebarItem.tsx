@@ -3,9 +3,9 @@
 import styled from '@emotion/styled';
 import { color } from '@odyssey-horizon/ui';
 import { Icon, Row, Text } from '@odyssey-horizon/ui';
-import { ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ReactNode } from 'react';
 
 interface SidebarItemProps {
   children: ReactNode;

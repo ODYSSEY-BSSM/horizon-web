@@ -1,7 +1,7 @@
 'use client';
 
 import styled from '@emotion/styled';
-import { color, Column, HorizonLogo, Row, Text } from '@odyssey-horizon/ui';
+import { Column, HorizonLogo, Row, Text, color } from '@odyssey-horizon/ui';
 import Link from 'next/link';
 import { ETC_ITEMS, MAIN_ITEMS } from './NavSidebar.constants';
 import { SidebarItem } from './SidebarItem/SidebarItem';

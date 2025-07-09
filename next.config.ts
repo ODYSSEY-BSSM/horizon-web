@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+    compiler: { emotion: true },
     transpilePackages: ['@odyssey-horizon/ui'],
     webpack: (config) => {
         config.resolve.alias = {
