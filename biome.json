@@ -72,9 +72,9 @@
     "formatter": {
       "quoteStyle": "single",
       "trailingComma": "es5",
-      "semicolons": "asNeeded",
+      "semicolons": "always",
       "arrowParentheses": "asNeeded",
-      "jsxQuoteStyle": "double",
+      "jsxQuoteStyle": "single",
       "quoteProperties": "asNeeded"
     }
   },
