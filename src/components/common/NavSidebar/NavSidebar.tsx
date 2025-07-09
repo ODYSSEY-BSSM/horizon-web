@@ -1,18 +1,17 @@
 'use client';
 
 import styled from '@emotion/styled';
-import { Column, HorizonLogo, Row, Text, color } from '@odyssey-horizon/ui';
-import Link from 'next/link';
+import { Column, Row, Text, color } from '@odyssey-horizon/ui';
 import { ETC_ITEMS, MAIN_ITEMS } from './NavSidebar.constants';
 import { SidebarItem } from './SidebarItem/SidebarItem';
 
 type Size = 'small' | 'big';
 
 interface NavSidebarProps {
-    size?: Size;
+  size?: Size;
 }
 
-const NavSidebar = ({size='big'}:NavSidebarProps) => {
+const NavSidebar = ({ size = 'big' }: NavSidebarProps) => {
   return (
     <StyledSidebar size={size}>
       <Column gap='10px' padding='10px 12px'>
@@ -49,7 +48,7 @@ const NavSidebar = ({size='big'}:NavSidebarProps) => {
 export default NavSidebar;
 
 interface StyledSidebarProps {
-    size: Size;
+  size: Size;
 }
 
 const StyledSidebar = styled.div`
