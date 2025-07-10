@@ -57,10 +57,6 @@ const SearchInput = styled.input`
     font-size: 14px;
     outline: none;
     
-    &:focus {
-        border-color: ${color.primary['500']};
-    }
-    
     &::placeholder {
         color: ${color.grayscale['400']};
         font-size: ${font.fontSize['12']};
