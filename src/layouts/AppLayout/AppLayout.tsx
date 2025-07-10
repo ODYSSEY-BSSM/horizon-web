@@ -26,7 +26,7 @@ const AppLayout = ({ children, title, roadmap = false }: AppLayoutProps) => {
         {roadmap && <RoadmapSidebar />}
       </Sidebar>
       <MainBox>
-        <main>{children}</main>
+        <main style={{height: '100%', width: '100%'}}>{children}</main>
       </MainBox>
     </StyledAppLayout>
   );
