@@ -67,6 +67,7 @@ const RoadmapList = () => {
       <ListBody>
         {roadmaps.map(roadmap => (
           <ListRow
+            key={`ListRow-${roadmap.id}`}
             id={roadmap.id}
             title={roadmap.title}
             location={roadmap.location}

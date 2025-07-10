@@ -24,7 +24,7 @@ const Dashboard = () => {
                 to='/my-roadmaps/123123'
                 description='마지막 로드맵'
               />
-              <LastActive title='부산소마팀' to='/teams/123123' description='마지막 팀' />
+              <LastActive title='오디세이' to='/teams/123123' description='마지막 팀' />
             </Row>
           </Toggle>
 
