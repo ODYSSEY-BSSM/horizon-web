@@ -1,7 +1,7 @@
+import ListRow from '@/components/dashboard/RoadmapList/ListRow/ListRow.tsx';
 import styled from '@emotion/styled';
-import { Icon, Row, Text, color } from '@odyssey-horizon/ui';
+import { color } from '@odyssey-horizon/ui';
 import { useEffect, useState } from 'react';
-import ListRow from "@/components/dashboard/RoadmapList/ListRow/ListRow.tsx";
 
 interface RoadmapItem {
   id: string;
@@ -56,19 +56,26 @@ const RoadmapList = () => {
 
   return (
     <StyledRoadmapList>
-          <ListHeader>
-            <div />
-            <div>이름</div>
-            <div>유형</div>
-            <div>마지막 수정</div>
-            <div>작성자</div>
-            <div />
-          </ListHeader>
-          <ListBody>
-            {roadmaps.map(roadmap => (
-              <ListRow id={roadmap.id} title={roadmap.title} location={roadmap.location} createdAt={roadmap.createdAt} author={roadmap.author} isFavorite={roadmap.isFavorite}/>
-            ))}
-          </ListBody>
+      <ListHeader>
+        <div />
+        <div>이름</div>
+        <div>유형</div>
+        <div>마지막 수정</div>
+        <div>작성자</div>
+        <div />
+      </ListHeader>
+      <ListBody>
+        {roadmaps.map(roadmap => (
+          <ListRow
+            id={roadmap.id}
+            title={roadmap.title}
+            location={roadmap.location}
+            createdAt={roadmap.createdAt}
+            author={roadmap.author}
+            isFavorite={roadmap.isFavorite}
+          />
+        ))}
+      </ListBody>
     </StyledRoadmapList>
   );
 };
@@ -104,5 +111,3 @@ const ListBody = styled.div`
     flex-direction: column;
     overflow-y: auto;
 `;
-
-

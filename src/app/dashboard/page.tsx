@@ -21,25 +21,25 @@ const Dashboard = () => {
             <Row gap='20px'>
               <LastActive
                 title='웹 디자인 기초'
-                to={`roadmaps/123123`}
+                to='/my-roadmaps/123123'
                 description='마지막 로드맵'
               />
-              <LastActive title='부산소마팀' to={`teams/123123`} description='마지막 팀' />
+              <LastActive title='부산소마팀' to='/teams/123123' description='마지막 팀' />
             </Row>
           </Toggle>
 
           <Toggle title='로드맵 수'>
             <Row style={{ border: `1px solid ${color.grayscale['100']}`, borderRadius: '8px' }}>
-              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' />
+              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' to='/my-roadmaps' />
               <Divider />
-              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' />
+              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' to='/my-roadmaps' />
               <Divider />
-              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' />
+              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' to='/my-roadmaps' />
             </Row>
           </Toggle>
 
           <Toggle title='로드맵 찾기'>
-            <Column gap='20px' style={{minHeight: '0'}}>
+            <Column gap='20px' style={{ minHeight: '0' }}>
               <RoadmapSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
               <RoadmapList />
             </Column>

@@ -2,7 +2,7 @@ import NavSidebar from '@/components/common/NavSidebar/NavSidebar.tsx';
 import styled from '@emotion/styled';
 import { Header, HorizonLogo, RoadmapSidebar, color } from '@odyssey-horizon/ui';
 import Link from 'next/link';
-import React from "react";
+import React from 'react';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -26,7 +26,7 @@ const AppLayout = ({ children, title, roadmap = false }: AppLayoutProps) => {
         {roadmap && <RoadmapSidebar />}
       </Sidebar>
       <MainBox>
-        <main style={{height: '100%', width: '100%'}}>{children}</main>
+        <main style={{ height: '100%', width: '100%' }}>{children}</main>
       </MainBox>
     </StyledAppLayout>
   );
