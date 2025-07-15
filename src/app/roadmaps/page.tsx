@@ -11,7 +11,7 @@ const Roadmaps = () => {
   const id = searchParams.get('id');
 
   const buttonClickHandler = () => {
-    window.location.href = `http://localhost:5173?id=${id}`;
+    window.location.href = `http://localhost:5173${id ? `?id=${id}` : ''}`;
   }
 
   return (
@@ -38,7 +38,7 @@ const Roadmaps = () => {
               시작하려면 로드맵을 선택하거나, 생성하세요.
             </Text>
             <Column gap='20px'>
-              <StyledButton>
+              <StyledButton onClick={buttonClickHandler}>
                 <Icon
                   name='graph_1'
                   variant='Stroke_L_24'
@@ -48,7 +48,7 @@ const Roadmaps = () => {
                   새 로드맵 생성
                 </Text>
               </StyledButton>
-              <StyledButton>
+              <StyledButton onClick={buttonClickHandler}>
                 <Icon name='folder' variant='Stroke_L_24' style={{ color: color.primary['500'] }} />
                 <Text variant='T_SB_16' color={ color.primary['500'] }>
                   새 폴더 생성
