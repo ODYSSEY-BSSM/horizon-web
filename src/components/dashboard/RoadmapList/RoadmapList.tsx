@@ -1,59 +1,21 @@
 import ListRow from '@/components/dashboard/RoadmapList/ListRow/ListRow.tsx';
 import styled from '@emotion/styled';
 import { color } from '@odyssey-horizon/ui';
-import { useEffect, useState } from 'react';
 
 interface RoadmapItem {
   id: string;
   title: string;
   location: '내 로드맵' | '팀 로드맵';
-  createdAt: string;
+  lastModifiedAt: string;
   author: string;
   isFavorite: boolean;
 }
 
-const RoadmapList = () => {
-  const [roadmaps, setRoadmaps] = useState<RoadmapItem[]>([]);
+interface RoadmapListProps {
+  roadmaps: RoadmapItem[];
+}
 
-  const mockRoadmaps: RoadmapItem[] = [
-    {
-      id: '1',
-      title: '프론트엔드 기초',
-      location: '내 로드맵',
-      createdAt: '2025.05.08',
-      author: '서현규',
-      isFavorite: false,
-    },
-    {
-      id: '2',
-      title: '백엔드 기초',
-      location: '내 로드맵',
-      createdAt: '2025.05.08',
-      author: '서현규',
-      isFavorite: false,
-    },
-    {
-      id: '3',
-      title: 'UX/UI',
-      location: '내 로드맵',
-      createdAt: '2025.05.08',
-      author: '서현규',
-      isFavorite: true,
-    },
-    {
-      id: '4',
-      title: '리액트 플러수',
-      location: '내 로드맵',
-      createdAt: '2025.05.08',
-      author: '서현규',
-      isFavorite: false,
-    },
-  ];
-
-  useEffect(() => {
-    setRoadmaps(mockRoadmaps);
-  }, []);
-
+const RoadmapList = ({ roadmaps }: RoadmapListProps) => {
   return (
     <StyledRoadmapList>
       <ListHeader>
@@ -65,13 +27,13 @@ const RoadmapList = () => {
         <div />
       </ListHeader>
       <ListBody>
-        {roadmaps.map(roadmap => (
+        {roadmaps?.map(roadmap => (
           <ListRow
             key={`ListRow-${roadmap.id}`}
             id={roadmap.id}
             title={roadmap.title}
             location={roadmap.location}
-            createdAt={roadmap.createdAt}
+            createdAt={roadmap.lastModifiedAt}
             author={roadmap.author}
             isFavorite={roadmap.isFavorite}
           />
@@ -92,7 +54,7 @@ const StyledRoadmapList = styled.div`
   background-color: ${color.white};
   overflow: hidden;
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
 `;
 
 const ListHeader = styled.div`
