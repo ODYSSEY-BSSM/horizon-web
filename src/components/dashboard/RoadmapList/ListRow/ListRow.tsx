@@ -1,5 +1,6 @@
+import { useBookmark } from '@/app/dashboard/Dashboard.hook';
 import styled from '@emotion/styled';
-import { Icon, Text, color } from '@odyssey-horizon/ui';
+import { Icon, Row, Text, color } from '@odyssey-horizon/ui';
 import Link from 'next/link';
 import React from 'react';
 
@@ -12,15 +13,12 @@ interface ListRowProps {
   isFavorite: boolean;
 }
 
-const ListRow = ({ id, title, location, createdAt, author, isFavorite }: ListRowProps) => {
-  const [bookmarked, setBookmarked] = React.useState(isFavorite);
-  const handleBookmarkClick = () => {
-    setBookmarked(prev => !prev);
-  };
+const ListRow = ({ id, title, location, createdAt, author = '나', isFavorite }: ListRowProps) => {
+  const { bookmarked, toggleBookmark } = useBookmark(isFavorite, id);
   return (
     <StyledListRow key={id}>
       <div style={{ justifyContent: 'center' }}>
-        <ActionButton onClick={handleBookmarkClick}>
+        <ActionButton onClick={toggleBookmark}>
           <Icon
             name='bookmark'
             variant={bookmarked ? 'Fill_R_24' : 'Stroke_R_24'}
