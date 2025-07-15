@@ -1,6 +1,6 @@
 import NavSidebar from '@/components/common/NavSidebar/NavSidebar.tsx';
 import styled from '@emotion/styled';
-import { Header, HorizonLogo, RoadmapSidebar, Button, color } from '@odyssey-horizon/ui';
+import { Header, HorizonLogo, RoadmapSidebar, color } from '@odyssey-horizon/ui';
 import Link from 'next/link';
 import React from 'react';
 
@@ -11,7 +11,7 @@ interface AppLayoutProps {
   button?: {
     text: string;
     leftIcon: string;
-  }
+  };
 }
 
 const AppLayout = ({ children, title, roadmap = false, button }: AppLayoutProps) => {

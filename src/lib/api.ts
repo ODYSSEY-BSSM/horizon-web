@@ -9,18 +9,19 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use(
-  (config) => {
+  config => {
     return config;
   },
-  (error) => {
+  error => {
     return Promise.reject(error);
   }
 );
 
 api.interceptors.response.use(
-  (response) => {
-    return response.data;  },
-  (error) => {
+  response => {
+    return response.data;
+  },
+  error => {
     return Promise.reject(error);
   }
 );
