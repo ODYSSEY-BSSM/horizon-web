@@ -15,12 +15,12 @@ interface AppLayoutProps {
   }
 }
 
-const AppLayout = ({ children, title, roadmap = false, button }: AppLayoutProps) => {
-    const mockData = {
-        directories: [],
-        roadmaps: [],
-    }
+const mockData = {
+    directories: [],
+    roadmaps: [],
+};
 
+const AppLayout = ({ children, title, roadmap = false, button }: AppLayoutProps) => {
   return (
     <StyledAppLayout>
       <LogoBox>
