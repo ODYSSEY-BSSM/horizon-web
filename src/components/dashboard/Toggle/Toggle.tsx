@@ -5,13 +5,14 @@ import React from 'react';
 interface ToggleProps {
   children: React.ReactNode;
   title?: string;
+  style?: React.CSSProperties;
 }
 
-const Toggle = ({ children, title }: ToggleProps) => {
+const Toggle = ({ children, title, style }: ToggleProps) => {
   const [isOpen, setIsOpen] = React.useState(true);
 
   return (
-    <StyledToggle>
+    <StyledToggle style={{ ...style }}>
       <TitleBox onClick={() => setIsOpen(prev => !prev)}>
         <Text variant='H_B_16' color={isOpen ? color.black : color.grayscale['400']}>
           {title}
@@ -34,7 +35,6 @@ const StyledToggle = styled.div`
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    min-height: 0;
 `;
 
 const TitleBox = styled.div`

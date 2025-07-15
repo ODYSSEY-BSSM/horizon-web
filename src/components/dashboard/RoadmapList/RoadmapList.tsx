@@ -47,7 +47,7 @@ export default RoadmapList;
 
 const StyledRoadmapList = styled.div`
   width: 100%;
-  min-height: 0;
+  min-height: 92px;
   flex: 1;
   border: 1px solid ${color.grayscale['100']};
   border-radius: 8px;
@@ -70,6 +70,7 @@ const ListHeader = styled.div`
 
 const ListBody = styled.div`
     display: flex;
+    min-height: 52px;
     flex: 1;
     flex-direction: column;
     overflow-y: auto;

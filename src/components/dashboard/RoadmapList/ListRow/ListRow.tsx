@@ -17,7 +17,7 @@ const ListRow = ({ id, title, location, createdAt, author = '나', isFavorite }:
   const { bookmarked, toggleBookmark } = useBookmark(isFavorite, id);
   return (
     <StyledListRow key={id}>
-      <div style={{ justifyContent: 'center' }}>
+      <Row justifyContent='center' alignItems='center'>
         <ActionButton onClick={toggleBookmark}>
           <Icon
             name='bookmark'
@@ -25,7 +25,7 @@ const ListRow = ({ id, title, location, createdAt, author = '나', isFavorite }:
             style={{ color: bookmarked ? color.primary['500'] : color.grayscale['400'] }}
           />
         </ActionButton>
-      </div>
+      </Row>
       <div>
         <Link href={`/roadmap/${id}`}>
           <Text variant='B_M_14' color={color.black}>
@@ -76,4 +76,5 @@ const ActionButton = styled.button`
     border: none;
     background: none;
     cursor: pointer;
+    display: flex;
 `;
