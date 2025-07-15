@@ -9,9 +9,11 @@ import AppLayout from '@/layouts/AppLayout/AppLayout.tsx';
 import styled from '@emotion/styled';
 import { Column, Row, color } from '@odyssey-horizon/ui';
 import { useState } from 'react';
+import { useDashboardData } from './Dashboard.hook';
 
 const Dashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const { lastActivity, roadmapCount, roadmapList } = useDashboardData();
 
   return (
     <AppLayout title='대시보드'>
@@ -20,8 +22,8 @@ const Dashboard = () => {
           <Toggle title='마지막 활동'>
             <Row gap='20px'>
               <LastActive
-                title='웹 디자인 기초'
-                to='/roadmaps/123123'
+                title={lastActivity?.title}
+                to={`/roadmaps/${lastActivity?.id}`}
                 description='마지막 로드맵'
               />
               <LastActive title='오디세이' to='/teams/123123' description='마지막 팀' />
@@ -30,7 +32,12 @@ const Dashboard = () => {
 
           <Toggle title='로드맵 수'>
             <Row style={{ border: `1px solid ${color.grayscale['100']}`, borderRadius: '8px' }}>
-              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' to='/roadmaps' />
+              <RoadmapCount
+                title='내 로드맵'
+                count={roadmapCount?.count}
+                lastModify={lastActivity?.lastModifiedAt}
+                to='/roadmaps'
+              />
               <Divider />
               <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' to='/roadmaps' />
               <Divider />
@@ -38,10 +45,10 @@ const Dashboard = () => {
             </Row>
           </Toggle>
 
-          <Toggle title='로드맵 찾기'>
+          <Toggle title='로드맵 찾기' style={{ minHeight: '0', flex: 1 }}>
             <Column gap='20px' style={{ minHeight: '0' }}>
               <RoadmapSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-              <RoadmapList />
+              <RoadmapList roadmaps={roadmapList || []} />
             </Column>
           </Toggle>
         </Column>
