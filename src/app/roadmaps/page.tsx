@@ -10,8 +10,12 @@ const Roadmaps = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
 
+  const buttonClickHandler = () => {
+    window.location.href = `http://localhost:5173?id=${id}`;
+  }
+
   return (
-    <AppLayout title='내 로드맵' button={{ text: '로드맵 수정', leftIcon: 'edit' }} roadmap>
+    <AppLayout title='내 로드맵' button={{ text: '로드맵 수정', leftIcon: 'edit', onClick: buttonClickHandler }} roadmap>
       <StyledRoadmaps>
         {id ? (
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
