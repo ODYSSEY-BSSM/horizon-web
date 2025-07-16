@@ -16,7 +16,7 @@ interface ListRowProps {
 const ListRow = ({ id, title, location, createdAt, author = '나', isFavorite }: ListRowProps) => {
   const { bookmarked, toggleBookmark } = useBookmark(isFavorite, id);
   return (
-    <StyledListRow key={id}>
+    <StyledListRow>
       <Row justifyContent='center' alignItems='center'>
         <ActionButton onClick={toggleBookmark}>
           <Icon
