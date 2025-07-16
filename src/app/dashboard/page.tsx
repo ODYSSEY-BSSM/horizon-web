@@ -23,7 +23,7 @@ const Dashboard = () => {
             <Row gap='20px'>
               <LastActive
                 title={lastActivity?.title}
-                to={`/roadmaps/${lastActivity?.id}`}
+                to={`/roadmaps?id=${lastActivity?.id}`}
                 description='마지막 로드맵'
               />
               <LastActive title='오디세이' to='/teams/123123' description='마지막 팀' />
