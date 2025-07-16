@@ -20,7 +20,6 @@ interface Directory {
 interface AppLayoutProps {
   children: React.ReactNode;
   title: string;
-  roadmap?: boolean;
   button?: {
     text: string;
     leftIcon: string;
