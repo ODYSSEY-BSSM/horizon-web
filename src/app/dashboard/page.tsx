@@ -21,7 +21,7 @@ const Dashboard = () => {
             <Row gap='20px'>
               <LastActive
                 title='웹 디자인 기초'
-                to='/my-roadmaps/123123'
+                to='/roadmaps/123123'
                 description='마지막 로드맵'
               />
               <LastActive title='오디세이' to='/teams/123123' description='마지막 팀' />
@@ -30,11 +30,11 @@ const Dashboard = () => {
 
           <Toggle title='로드맵 수'>
             <Row style={{ border: `1px solid ${color.grayscale['100']}`, borderRadius: '8px' }}>
-              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' to='/my-roadmaps' />
+              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' to='/roadmaps' />
               <Divider />
-              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' to='/my-roadmaps' />
+              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' to='/roadmaps' />
               <Divider />
-              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' to='/my-roadmaps' />
+              <RoadmapCount title='내 로드맵' count={7} lastModify='2025-05-08' to='/roadmaps' />
             </Row>
           </Toggle>
 
