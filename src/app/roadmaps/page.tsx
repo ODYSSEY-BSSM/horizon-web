@@ -5,10 +5,12 @@ import styled from '@emotion/styled';
 import { Column, Icon, Text, color } from '@odyssey-horizon/ui';
 import { useSearchParams } from 'next/navigation';
 import Image from "next/image";
+import { useRoadmapImage } from './Roadmaps.hook';
 
 const Roadmaps = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
+  const { imageUrl } = useRoadmapImage(id || undefined);
 
   const buttonClickHandler = () => {
     window.location.href = `http://localhost:5173${id ? `?id=${id}` : ''}`;
@@ -19,12 +21,15 @@ const Roadmaps = () => {
       <StyledRoadmaps>
         {id ? (
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-              <Image 
-                fill
-                src=''
-                alt='로드맵 썸네일 이미지'
-                style={{ objectFit: 'contain' }}
-              />
+              {imageUrl?.url && (
+                <Image 
+                  fill
+                  src={'/api'+imageUrl.url}
+                  alt='로드맵 썸네일 이미지'
+                  style={{ objectFit: 'contain' }}
+                  unoptimized
+                />
+              )}
             </div>
         ) : (
           <Column gap='40px' style={{ position: 'absolute', top: '20%', left: '20%' }}>
