@@ -4,6 +4,19 @@ import { Header, HorizonLogo, RoadmapSidebar, color } from '@odyssey-horizon/ui'
 import Link from 'next/link';
 import React from 'react';
 
+interface Roadmap {
+  id: number;
+  title: string;
+}
+
+interface Directory {
+  id: number;
+  name: string;
+  parentId: number;
+  directories: Directory[];
+  roadmaps: Roadmap[];
+}
+
 interface AppLayoutProps {
   children: React.ReactNode;
   title: string;
@@ -13,14 +26,13 @@ interface AppLayoutProps {
     leftIcon: string;
     onClick: () => void;
   };
+  roadmapData?: {
+    directories: Directory[];
+    roadmaps: Roadmap[];
+  };
 }
 
-const mockData = {
-    directories: [],
-    roadmaps: [],
-};
-
-const AppLayout = ({ children, title, roadmap = false, button }: AppLayoutProps) => {
+const AppLayout = ({ children, title, button, roadmapData }: AppLayoutProps) => {
   return (
     <StyledAppLayout>
       <LogoBox>
@@ -32,8 +44,8 @@ const AppLayout = ({ children, title, roadmap = false, button }: AppLayoutProps)
         <Header title={title} button={button} />
       </HeaderBox>
       <Sidebar>
-        <NavSidebar size={roadmap ? 'small' : 'big'} />
-        {roadmap && <RoadmapSidebar data={mockData} />}
+        <NavSidebar size={roadmapData ? 'small' : 'big'} />
+        {roadmapData && <RoadmapSidebar data={roadmapData} />}
       </Sidebar>
       <MainBox>
         <main style={{ height: '100%', width: '100%' }}>{children}</main>

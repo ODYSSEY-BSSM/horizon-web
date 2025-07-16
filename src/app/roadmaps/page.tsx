@@ -3,34 +3,38 @@
 import AppLayout from '@/layouts/AppLayout/AppLayout.tsx';
 import styled from '@emotion/styled';
 import { Column, Icon, Text, color } from '@odyssey-horizon/ui';
+import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import Image from "next/image";
-import { useRoadmapImage } from './Roadmaps.hook';
+import { useRoadmapsData } from './Roadmaps.hook';
 
 const Roadmaps = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
-  const { imageUrl } = useRoadmapImage(id || undefined);
+  const { imageUrl, rootContents } = useRoadmapsData(id || undefined);
 
   const buttonClickHandler = () => {
     window.location.href = `http://localhost:5173${id ? `?id=${id}` : ''}`;
-  }
+  };
 
   return (
-    <AppLayout title='내 로드맵' button={{ text: '로드맵 수정', leftIcon: 'edit', onClick: buttonClickHandler }} roadmap>
+    <AppLayout
+      title='내 로드맵'
+      button={{ text: '로드맵 수정', leftIcon: 'edit', onClick: buttonClickHandler }}
+      roadmapData={rootContents || { directories: [], roadmaps: [] }}
+    >
       <StyledRoadmaps>
         {id ? (
-            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-              {imageUrl?.url && (
-                <Image 
-                  fill
-                  src={'/api'+imageUrl.url}
-                  alt='로드맵 썸네일 이미지'
-                  style={{ objectFit: 'contain' }}
-                  unoptimized
-                />
-              )}
-            </div>
+          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            {imageUrl?.url && (
+              <Image
+                fill
+                src={`/api${imageUrl.url}`}
+                alt='로드맵 썸네일 이미지'
+                style={{ objectFit: 'contain' }}
+                unoptimized
+              />
+            )}
+          </div>
         ) : (
           <Column gap='40px' style={{ position: 'absolute', top: '20%', left: '20%' }}>
             <Column>
@@ -49,13 +53,13 @@ const Roadmaps = () => {
                   variant='Stroke_L_24'
                   style={{ color: color.primary['500'] }}
                 />
-                <Text variant='T_SB_16' color={ color.primary['500'] }>
+                <Text variant='T_SB_16' color={color.primary['500']}>
                   새 로드맵 생성
                 </Text>
               </StyledButton>
               <StyledButton onClick={buttonClickHandler}>
                 <Icon name='folder' variant='Stroke_L_24' style={{ color: color.primary['500'] }} />
-                <Text variant='T_SB_16' color={ color.primary['500'] }>
+                <Text variant='T_SB_16' color={color.primary['500']}>
                   새 폴더 생성
                 </Text>
               </StyledButton>
