@@ -27,7 +27,7 @@ const ListRow = ({ id, title, location, createdAt, author = '나', isFavorite }:
         </ActionButton>
       </Row>
       <div>
-        <Link href={`/roadmaps/${id}`}>
+        <Link href={`/roadmaps?id=${id}`}>
           <Text variant='B_M_14' color={color.black}>
             {title}
           </Text>
