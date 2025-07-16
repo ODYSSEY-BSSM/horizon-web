@@ -11,8 +11,14 @@ interface AppLayoutProps {
   button?: {
     text: string;
     leftIcon: string;
+    onClick: () => void;
   };
 }
+
+const mockData = {
+    directories: [],
+    roadmaps: [],
+};
 
 const AppLayout = ({ children, title, roadmap = false, button }: AppLayoutProps) => {
   return (
@@ -27,7 +33,7 @@ const AppLayout = ({ children, title, roadmap = false, button }: AppLayoutProps)
       </HeaderBox>
       <Sidebar>
         <NavSidebar size={roadmap ? 'small' : 'big'} />
-        {roadmap && <RoadmapSidebar />}
+        {roadmap && <RoadmapSidebar data={mockData} />}
       </Sidebar>
       <MainBox>
         <main style={{ height: '100%', width: '100%' }}>{children}</main>
