@@ -13,7 +13,7 @@ const Roadmaps = () => {
   const { imageUrl, rootContents } = useRoadmapsData(id || undefined);
 
   const buttonClickHandler = () => {
-    window.location.href = `http://localhost:5173${id ? `?id=${id}` : ''}`;
+    window.location.href = `http://localhost:5173${id ? `?roadmapId=${id}` : ''}`;
   };
 
   return (
